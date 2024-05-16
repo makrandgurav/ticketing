@@ -1,5 +1,7 @@
 import express, { Application } from 'express';
 import { connectMongo } from './config/mongoConnection';
+import { userRouter } from './routes/user.routes';
+import { requestLogger } from './middlewares/logger';
 
 const app: Application = express();
 app.set('view engine', 'ejs');
@@ -18,6 +20,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   res.render('login')
+})
+
+app.use('/api/v1/user', requestLogger, userRouter);
+
+process.on("uncaughtException", (err) => {
+  console.log("Uncaught Error:", err);
 })
 
 app.listen(5500, () => {

@@ -22,6 +22,7 @@ const createAdmin = async () => {
     await UserModel.findOneAndUpdate({username: 'admin'}, {
       username: 'admin',
       password: 'admin',
+      role: 'ADMIN'
     }, { upsert: true }).exec();
 
     console.log('Admin user created');
