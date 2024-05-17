@@ -2,9 +2,11 @@ import express, { Application } from 'express';
 import { connectMongo } from './config/mongoConnection';
 import { userRouter } from './routes/user.routes';
 import { requestLogger } from './middlewares/logger';
+import path from 'path';
 
 const app: Application = express();
 app.set('view engine', 'ejs');
+app.set("views", path.resolve("./views"));
 
 (async() => {
   try {
