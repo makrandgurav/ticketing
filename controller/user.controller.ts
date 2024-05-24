@@ -23,7 +23,7 @@ export const userSignUp = async (req: any, res: any) => {
     }
 
     await validateUser(req.body);
-    res.status(200).render("login");
+    res.status(200).render("index");
   } catch (error) {
     console.log(error);
     return res.status(400).render("register");
