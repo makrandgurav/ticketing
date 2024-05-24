@@ -1,6 +1,6 @@
 // database/connection.ts
 import mongoose from 'mongoose';
-import { TrainModel } from '../models/trains.models';
+import { TrainModel } from '../models/trains.model';
 import { UserModel } from '../models/users.model';
 
 export const connectMongo = async (MONGO_URL: string) => {

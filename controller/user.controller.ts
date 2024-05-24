@@ -1,4 +1,4 @@
-import { TrainModel } from "../models/trains.models";
+import { TrainModel } from "../models/trains.model";
 import { validateUser } from "../services/user.service";
 
 export const userLogin = async (req: any, res: any) => {
@@ -17,8 +17,6 @@ export const userLogin = async (req: any, res: any) => {
 };
 
 export const fetchDashboard = async (req: any, res: any) => {
-  console.log(req.cookies.username, ':----req.cookies.username---');
-  
   const availableTrains = await TrainModel.find({
     availableSeats: { $gt: 0}
   });
