@@ -1,3 +1,4 @@
+import { TrainModel } from "../models/trains.models";
 import { validateUser } from "../services/user.service";
 
 export const userLogin = async (req: any, res: any) => {
@@ -6,7 +7,10 @@ export const userLogin = async (req: any, res: any) => {
       return res.status(400).render("login");
     }
 
-    return res.status(200).render("booking", { user: "test" });
+    const availableTrains = await TrainModel.find({
+      availableSeats: { $gt: 0}
+    });
+    return res.status(200).render("dashboard", { user: req.body.username, availableTrains });
   } catch (error) {
     console.log(error);
   }
