@@ -9,6 +9,8 @@ export const userLogin = async (req: any, res: any) => {
 
     
     return res.status(200).cookie('username', req.body.username).redirect('/api/v1/user/dashboard');
+    // nginx configuration
+    // return res.status(200).cookie('username', req.body.username).redirect('/dashboard');
   } catch (error) {
     console.log(error);
   }
