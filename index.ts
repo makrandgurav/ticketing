@@ -3,14 +3,18 @@ import { connectMongo } from './config/mongoConnection';
 import { userRouter } from './routes/user.routes';
 import { requestLogger } from './middlewares/logger';
 import path from 'path';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app: Application = express();
 app.set('view engine', 'ejs');
 app.set("views", path.resolve("./views"));
+const { PORT, MONGO_URL }: any = process.env;
 
 (async() => {
   try {
-    await connectMongo();
+    await connectMongo(MONGO_URL);
   } catch (error) {
     console.error('Error starting Mongo:', error);
   }
@@ -30,6 +34,8 @@ process.on("uncaughtException", (err) => {
   console.log("Uncaught Error:", err);
 })
 
-app.listen(5500, () => {
-  console.log('Server running on 5500')
+app.listen(PORT, () => {
+  console.log(MONGO_URL);
+  
+  console.log(`Server running on ${PORT}`)
 });

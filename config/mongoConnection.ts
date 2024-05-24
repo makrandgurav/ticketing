@@ -2,9 +2,9 @@
 import mongoose from 'mongoose';
 import { UserModel } from '../models/users.model';
 
-export const connectMongo = async () => {
+export const connectMongo = async (MONGO_URL: string) => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/ticketing', {
+    await mongoose.connect(MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     } as mongoose.ConnectOptions); // Adding type assertion to ConnectOptions
