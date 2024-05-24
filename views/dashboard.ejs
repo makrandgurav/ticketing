@@ -9,17 +9,18 @@
     <h1>Ticketing</h1>
     <h4>Welcome, <%= user %> to the ticketing portal</h4>
 
-    <!-- <form action="/api/v1/user/sign-up" method="post">
-            <label>Username</label>
-            <input type= "text" aria-label="Name" name="username" />
-            <br/>
-            <label>Password</label>
-            <input type= "password" aria-label="Name" name="userpwd" />
-            <br/>
-            <label>Full name</label>
-            <input type= "text" aria-label="Name" name="userfullname" />
-            <br/>
-            <input type="submit" value="Register" />
-        </form> -->
+    <div class="container d-flex flex-wrap">
+
+    <% for(var i=0; i < availableTrains.length; i++) { %>
+      <div class="card mb-3 mx-2" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= availableTrains[i].trainName %></h5>
+          <p class="card-text">Availability : <%= availableTrains[i].availableSeats %></p>
+          <a href="#" class="btn btn-success">Book Now</a>
+        </div>
+      </div>
+    <% } %>
+    </div>
   </body>
 </html>

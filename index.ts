@@ -4,7 +4,7 @@ import { userRouter } from './routes/user.routes';
 import { requestLogger } from './middlewares/logger';
 import path from 'path';
 import dotenv from 'dotenv';
-
+import cookieParser from 'cookie-parser';
 dotenv.config();
 
 const app: Application = express();
@@ -21,6 +21,7 @@ const { PORT, MONGO_URL }: any = process.env;
 })();
 
 // Body parsing Middleware
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

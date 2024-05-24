@@ -10,7 +10,7 @@ export const isAuthenticated = async (req: any, res: any, next: any) => {
     if (!req || !req.body.username || !req.body.userpwd) {
       console.log("Bad request");
 
-      return res.status(400).render("login");
+      return res.status(401).redirect('/');
     }
     const { username, userpwd, fullname } = req.body;
     const hash: any = await UserModel.findOne({
@@ -21,12 +21,12 @@ export const isAuthenticated = async (req: any, res: any, next: any) => {
 
     if (!findUser) {
       console.log("Unauthenticated");
-      return res.status(401).render("login");
+      return res.status(401).redirect('/');
     }
     const jwtToken = await generateToken({username, fullname}, secret);
 
     if (!jwtToken) {
-      return res.status(401).render("login");
+      return res.status(401).redirect('/');
     }
 
     req.user = req.body;
@@ -35,7 +35,7 @@ export const isAuthenticated = async (req: any, res: any, next: any) => {
     next();
   } catch (error) {
     console.log(error);
-    return res.status(401).render("login");
+    return res.status(401).redirect('/');
   }
 };
 
@@ -55,4 +55,19 @@ export const generateToken = async (payload: Payload, jwtSecret :string ) => {
 interface Payload {
   username: string,
   fullname: string
+}
+
+export const validateToken = async (req: any, res: any, next: any) => {
+  if (!req || !req.cookies || !req.cookies.token) {
+    return res.status(401).redirect('/');
+  }
+
+  if (req.cookies.token) {
+    const verification = await jwt.verify(req.cookies.token, secret)
+    if (verification) {
+      console.log(verification);
+      return next();
+    }
+  }
+  return res.status(401).redirect('/');
 }

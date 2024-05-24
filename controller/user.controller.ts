@@ -7,14 +7,21 @@ export const userLogin = async (req: any, res: any) => {
       return res.status(400).render("login");
     }
 
-    const availableTrains = await TrainModel.find({
-      availableSeats: { $gt: 0}
-    });
-    return res.status(200).render("dashboard", { user: req.body.username, availableTrains });
+    
+    return res.status(200).cookie('username', req.body.username).redirect('/api/v1/user/dashboard');
   } catch (error) {
     console.log(error);
   }
 };
+
+export const fetchDashboard = async (req: any, res: any) => {
+  console.log(req.cookies.username, ':----req.cookies.username---');
+  
+  const availableTrains = await TrainModel.find({
+    availableSeats: { $gt: 0}
+  });
+  res.status(200).render("dashboard", { user: req.cookies.username, availableTrains });
+}
 
 export const userSignUp = async (req: any, res: any) => {
   try {
@@ -37,3 +44,13 @@ export const userRegisterPage = async (req: any, res: any) => {
     console.log(error);
   }
 };
+
+export const logout = (req: any, res: any) => {
+  try {
+    res.clearCookie('token');
+    res.clearCookie('username');
+    return res.status(200).redirect('/')
+  } catch (error) {
+    console.log(error);
+  }
+}
