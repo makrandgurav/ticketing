@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.render('login')
+  res.render('index')
 })
 
 app.use('/api/v1/user', requestLogger, userRouter);

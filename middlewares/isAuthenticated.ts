@@ -4,10 +4,6 @@ import * as bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 const secret = 'makrandandsiddhi';
 
-const { sign, verify } = jwt
-
-
-
 export const isAuthenticated = async (req: any, res: any, next: any) => {
   console.log("Checking if user is Authenticated");
   try {
@@ -33,6 +29,7 @@ export const isAuthenticated = async (req: any, res: any, next: any) => {
       return res.status(401).render("login");
     }
 
+    req.user = req.body;
     console.log(jwtToken, ':---jwtToken---');
     res.cookie('token', jwtToken, { httpOnly: true });
     next();

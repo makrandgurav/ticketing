@@ -3,8 +3,12 @@
     <title>Ticketing</title>
   </head>
   <body>
+    <% if (locals.user) { %>
+      <%- include('partials/header') %>
+    <% }%>
     <h1>Ticketing</h1>
     <h4>Welcome, <%= user %> to the ticketing portal</h4>
+
     <!-- <form action="/api/v1/user/sign-up" method="post">
             <label>Username</label>
             <input type= "text" aria-label="Name" name="username" />
