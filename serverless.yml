@@ -15,13 +15,34 @@ provider:
     SOME_SLS_VAR: ${sls:instanceId}
 
 functions:
-  starterFunction:
+  signUp:
     environment:
       SOME_TEST_ENV_2: MALHARR
-    handler: app/handlers/userHandler.greeter
+    handler: app/handlers/userHandler.signUp
     events:
       - http:
-          path: hello-world
+          path: /user/sign-up
+          method: POST
+
+  login:
+    handler: app/handlers/userHandler.login
+    events:
+      - http:
+          path: /user/login
+          method: POST
+
+  verify:
+    handler: app/handlers/userHandler.verify
+    events:
+      - http:
+          path: /user/verify
+          method: POST
+
+  logout:
+    handler: app/handlers/userHandler.logout
+    events:
+      - http:
+          path: /user/logout
           method: get
 
 plugins:
