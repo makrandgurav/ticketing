@@ -1,10 +1,7 @@
 org: ticketing
 app: testapp
 service: aws-ticketing
-frameworkVersion: '3'
-plugins:
-  - serverless-offline
-  - serverless-dotenv-plugin
+frameworkVersion: "3"
 
 provider:
   name: aws
@@ -21,8 +18,12 @@ functions:
   starterFunction:
     environment:
       SOME_TEST_ENV_2: MALHARR
-    handler: src/handler/greeterHandler.greeter
-    events: 
+    handler: app/handlers/userHandler.greeter
+    events:
       - http:
           path: hello-world
           method: get
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
