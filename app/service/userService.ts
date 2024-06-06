@@ -4,7 +4,9 @@ import { successResponse } from "../utility/response";
 export class UserService {
  
   createUser = async(event: APIGatewayProxyEventV2) => {
-    const bodyParams = JSON.parse(event.body as string);
+    const bodyParams = event.body;
+    console.log(bodyParams, ':---bodyParams--');
+    
     return successResponse({message: 'User created', body: bodyParams})
   }
 

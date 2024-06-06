@@ -2,12 +2,13 @@
 // tech geek guru
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda";
 import { UserService } from "../service/userService";
-
+import middy from '@middy/core';
+import bodyParser from '@middy/http-json-body-parser';
 const service = new UserService();
 
-const signUp = async (event: APIGatewayProxyEventV2) => {
-  return await service.createUser(event);
-};
+const signUp = middy((event: APIGatewayProxyEventV2) => {
+  return service.createUser(event);
+}).use(bodyParser());
 
 const login = async (event: APIGatewayProxyEventV2) => {
   return await service.login(event);
