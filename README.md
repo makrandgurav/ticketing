@@ -32,5 +32,8 @@ tsconfig
   "exclude": ["node_modules"]
 }
 
+ npm i @middy/core@4.7.0
+ npm i @middy/http-json-body-parser@4.7.0
+ 
 
 
