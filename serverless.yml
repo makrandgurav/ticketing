@@ -2,19 +2,27 @@ org: ticketing
 app: testapp
 service: aws-ticketing
 frameworkVersion: '3'
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
 
 provider:
   name: aws
   runtime: nodejs16.x
   region: ap-south-1
+  timeout: 30
+  environment:
+    SOME_TEST_ENV_1: MAKRAND
+    SOME_TEST_ENV_2: SIDDHI
+    SOME_AWS_VAR: ${aws:accountId}
+    SOME_SLS_VAR: ${sls:instanceId}
 
 functions:
   starterFunction:
+    environment:
+      SOME_TEST_ENV_2: MALHARR
     handler: src/handler/greeterHandler.greeter
     events: 
       - http:
           path: hello-world
           method: get
-
-plugins:
-  - serverless-offline
