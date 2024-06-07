@@ -8,6 +8,9 @@ provider:
   runtime: nodejs16.x
   region: ap-south-1
   timeout: 30
+  versionFunctions: false
+  stage: dev
+
   environment:
     SOME_TEST_ENV_1: MAKRAND
     SOME_TEST_ENV_2: SIDDHI
@@ -48,3 +51,4 @@ functions:
 plugins:
   - serverless-offline
   - serverless-plugin-typescript
+  

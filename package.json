@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node-dev --respawn ./index.ts",
     "dev": "sls offline",
-    "build": "tsc"
+    "build": "tsc",
+    "deploy": "sls deploy --verbose"
   },
   "repository": {
     "type": "git",
